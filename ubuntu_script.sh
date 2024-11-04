@@ -28,23 +28,13 @@ echo "#
 # and should contain a list of modules that define the services to be
 # used to change user passwords.  The default is pam_unix.
 
-# Explanation of pam_unix options:
-# The "yescrypt" option enables
-#hashed passwords using the yescrypt algorithm, introduced in Debian
-#11.  Without this option, the default is Unix crypt.  Prior releases
-#used the option "sha512"; if a shadow password hash will be shared
-#between Debian 11 and older releases replace "yescrypt" with "sha512"
-#for compatibility .  The "obscure" option replaces the old
-#`OBSCURE_CHECKS_ENAB' option in login.defs.  See the pam_unix manpage
-#for other options.
-
 # As of pam 1.0.1-6, this file is managed by pam-auth-update by default.
 # To take advantage of this, it is recommended that you configure any
 # local modules either before or after the default block, and use
 # pam-auth-update to manage selection of other modules.  See
 # pam-auth-update(8) for details.
 
-# here are the per-package modules (the "Primary" block)
+
 password	requisite			pam_pwquality.so retry=4 minlen=9 difok=4 lcredit=2 ucredit=2 dcredit=1 ocredit=1 reject_username enforce_for_root
 password	[success=2 default=ignore]	pam_unix.so obscure use_authtok try_first_pass yescrypt
 password	sufficient			pam_sss.so use_authtok
@@ -54,39 +44,17 @@ password	requisite			pam_deny.so
 # this avoids us returning an error just because nothing sets a success code
 # since the modules above will each just jump around
 password	required			pam_permit.so
-# and here are more per-package modules (the "Additional" block)
+
 password	optional	pam_gnome_keyring.so 
 # end of pam-auth-update config" > /etc/pam.d/common-password
 
 #Lockout Policy
 cp /etc/pam.d/common-auth /etc/pam.d/common-auth.backup
 echo "#
-# /etc/pam.d/common-auth - authentication settings common to all services
-#
-# This file is included from other service-specific PAM config files,
-# and should contain a list of the authentication modules that define
-# the central authentication scheme for use on the system
-# (e.g., /etc/shadow, LDAP, Kerberos, etc.).  The default is to use the
-# traditional Unix authentication mechanisms.
-#
-# As of pam 1.0.1-6, this file is managed by pam-auth-update by default.
-# To take advantage of this, it is recommended that you configure any
-# local modules either before or after the default block, and use
-# pam-auth-update to manage selection of other modules.  See
-# pam-auth-update(8) for details.
-
-# here are the per-package modules (the "Primary" block)
 auth	[success=2 default=ignore]	pam_unix.so
 auth	[success=1 default=ignore]	pam_sss.so use_first_pass
-# here's the fallback if no module succeeds
-auth	requisite			pam_deny.so
-# prime the stack with a positive return value if there isn't one already;
-# this avoids us returning an error just because nothing sets a success code
-# since the modules above will each just jump around
-auth	required			pam_permit.so
-# and here are more per-package modules (the "Additional" block)
-auth	optional			pam_cap.so 
-# end of pam-auth-update config" > /etc/pam.d/common-auth
+
+auth	requisite			pam_deny.so" > /etc/pam.d/common-auth
 
 #Open and Listening Ports
 apt-get install nettools
@@ -134,7 +102,7 @@ echo "#
 #        below.
 #      - MAIL_FILE defines the location of the users mail spool files as the
 #        fully-qualified filename obtained by prepending the user home
-#        directory before $MAIL_FILE
+#        directory before
 #
 # NOTE: This is no more used for setting up users MAIL environment variable
 #       which is, starting from shadow 4.0.12-1 in Debian, entirely the
@@ -168,7 +136,7 @@ LOG_UNKFAIL_ENAB	no
 LOG_OK_LOGINS		no
 
 #
-# Enable "syslog" logging of su activity - in addition to sulog file logging.
+
 # SYSLOG_SG_ENAB does the same for newgrp and sg.
 #
 SYSLOG_SU_ENAB		yes
@@ -181,7 +149,7 @@ SYSLOG_SG_ENAB		yes
 
 #
 # If defined, file which maps tty line to TERM environment parameter.
-# Each line of the file is in a format something like "vt100  tty01".
+
 #
 #TTYTYPE_FILE	/etc/ttytype
 
@@ -191,12 +159,6 @@ SYSLOG_SG_ENAB		yes
 #
 FTMP_FILE	/var/log/btmp
 
-#
-# If defined, the command name to display when running "su -".  For
-# example, if this is defined as "su" then a "ps" will display the
-# command is "-su".  If not defined, then "ps" would display the
-# name of the shell actually being run, e.g. something like "-sh".
-#
 SU_NAME		su
 
 #
@@ -221,17 +183,11 @@ ENV_PATH	PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 #	TTYGROUP	Login tty will be assigned this group ownership.
 #	TTYPERM		Login tty will be set to this permission.
 #
-# If you have a "write" program which is "setgid" to a special group
-# which owns the terminals, define TTYGROUP to the group number and
-# TTYPERM to 0620.  Otherwise leave TTYGROUP commented out and assign
-# TTYPERM to either 622 or 600.
-#
 # In Debian /usr/bin/bsd-write or similar programs are setgid tty
 # However, the default and recommended value for TTYPERM is still 0600
 # to not allow anyone to write to anyone else console or terminal
 
 # Users can still allow other people to write them by issuing 
-# the "mesg y" command.
 
 TTYGROUP	tty
 TTYPERM		0600
@@ -241,23 +197,18 @@ TTYPERM		0600
 #
 #	ERASECHAR	Terminal ERASE character ('\010' = backspace).
 #	KILLCHAR	Terminal KILL character ('\025' = CTRL/U).
-#	UMASK		Default "umask" value.
 #
 # The ERASECHAR and KILLCHAR are used only on System V machines.
 # 
 # UMASK is the default umask value for pam_umask and is used by
 # useradd and newusers to set the mode of the new home directories.
-# 022 is the "historical" value in Debian for UMASK
 # 027, or even 077, could be considered better for privacy
 # There is no One True Answer here : each sysadmin must make up his/her
 # mind.
-#
-# If USERGROUPS_ENAB is set to "yes", that will modify this UMASK default value
 # for private user groups, i. e. the uid is the same as gid, and username is
 # the same as the primary group name: for these, the user permissions will be
 # used as group permissions, e. g. 022 will become 002.
 #
-# Prefix these values with "0" to get octal, "0x" to get hexadecimal.
 #
 ERASECHAR	0177
 KILLCHAR	025
@@ -310,12 +261,6 @@ LOGIN_RETRIES		5
 #
 LOGIN_TIMEOUT		60
 
-#
-# Which fields may be changed by regular users using chfn - use
-# any combination of letters "frwh" (full name, room number, work
-# phone, home phone).  If not defined, no changes are allowed.
-# For backward compatibility, "yes" = "rwh" and "no" = "frwh".
-# 
 CHFN_RESTRICT		rwh
 
 #
@@ -351,9 +296,6 @@ USERGROUPS_ENAB yes
 # FAKE_SHELL /bin/fakeshell
 
 #
-# If defined, either full pathname of a file containing device names or
-# a ":" delimited list of device names.  Root logins will be allowed only
-# upon these devices.
 #
 # This variable is used by login and su.
 #
@@ -374,11 +316,6 @@ USERGROUPS_ENAB yes
 #CONSOLE_GROUPS		floppy:audio:cdrom
 
 #
-# If set to "yes", new passwords will be encrypted using the MD5-based
-# algorithm compatible with the one used by recent releases of FreeBSD.
-# It supports passwords of unlimited length and longer salt strings.
-# Set to "no" if you need to copy encrypted passwords to other systems
-# which don't understand the new algorithm.  Default is "no".
 #
 # This variable is deprecated. You should use ENCRYPT_METHOD.
 #
@@ -453,8 +390,7 @@ ENCRYPT_METHOD SHA512
 # CLOSE_SESSIONS
 # LOGIN_STRING
 # NO_PASSWORD_CONSOLE
-# QMAIL_DIR
-" > /etc/login.defs
+# QMAIL_DIR" > /etc/login.defs
 
 #Disable Root Login
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
@@ -538,7 +474,6 @@ KbdInteractiveAuthentication no
 # be allowed through the KbdInteractiveAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via KbdInteractiveAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and KbdInteractiveAuthentication to 'no'.
