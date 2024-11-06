@@ -17,11 +17,15 @@ for file in $(find /home -type f | grep -if extensions.txt); do rm -f "$file"; d
 apt install libpam-pwquality
 cp /etc/pam.d/common-password /etc/pam.d/common-password.backup 
 
-#Open and Listening Ports
+#Open and Listening Ports.
 apt install net-tools
 echo "
 The output of the netstat command that displays all the ports:" >> ubuntu_notes.txt
 netstat -a >> ubuntu_notes.txt
+
+echo "
+The output of the ss command that displays all the ports and processes of listening ports:" >> ubuntu_notes.txt
+suso ss -tlnp >> ubuntu_notes.txt
 
 #How to close a port
 echo "
@@ -43,3 +47,11 @@ The output of the systemctl command that displays all of the unit files:" >> ubu
 systemctl list-unit-files >> ubuntu_notes.txt
 echo "
 Use the systemctl stop and disable command to remove unwanted services." >> ubuntu_notes.txt
+
+#Checking for unwanted file and folder permissions.
+echo "
+The output of the ls -alF command that displays read, write, and execute permission for the /etc directory." >> ubuntu_notes.txt
+ls -alF /etc >> ubuntu_notes.txt
+echo "
+use the ls -l command to check other files and folders for unwanted permissions." >> ubuntu_notes.txt
+
