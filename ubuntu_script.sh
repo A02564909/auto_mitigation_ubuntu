@@ -149,6 +149,6 @@ net.ipv4.ip_forward=0
 # for what other values do
 #kernel.sysrq=438
 " > /etc/sysctl.conf
-
+sysctl --system
 
 
