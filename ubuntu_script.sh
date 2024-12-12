@@ -63,7 +63,3 @@ echo "Input the required text into the faillock files under the /usr/share/pam-c
 #Configuring System Parameters
 cp /etc/sysctl.conf /etc/sysctl.conf.backup
 echo "Configure sytem parameters in the /etc/sysctl.conf file."
-
-if  
-
-
