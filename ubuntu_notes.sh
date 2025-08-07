@@ -1,4 +1,4 @@
-#!usr/bin/bash
+#!usr/bin/env bash
 #PW Policy
 #Lockout Policy
 #Open and Listening Ports
