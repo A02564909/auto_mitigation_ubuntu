@@ -15,8 +15,9 @@ for file in $(find /home -type f | grep -if extensions.txt); do rm -f "$file"; d
 
 #PW Policy
 apt install libpam-pwquality
-cp /etc/pam.d/common-password /etc/pam.d/common-password.backup 
-
+cp /etc/pam.d/common-password /etc/pam.d/common-password.backup >> ubuntu_notes.txt
+echo "
+Configure Password Policy"
 #Open and Listening Ports.
 apt install net-tools
 echo "
