@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+clear
+chown root:root /etc/sudoers
+chmod 440 /etc/sudoers
+chown -R root:root /etc/sudoers.d/
+chmod 750 /etc/sudoers.d/
+chmod 440 /etc/sudoers.d/*
+# changes permissions for the sudoers.d directory and sudoers file
+cp /etc/sudoers /etc/sudoers.bk # backs up original sudoers file
+sudo tee /etc/sudoers > /dev/null << EOL 
+Defaults 	env_reset
+Defaults 	mail_badpass
+Defaults 	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+Defaults 	use_pty
+
+# User privilege specification
+root		ALL=(ALL:ALL) ALL
+
+# Members of the admin group may gain root privileges
+%admin 		ALL=(ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo		ALL=(ALL:ALL) ALL
+
+@includedir /etc/sudoers.d
+EOL
+
+chmod 440 /etc/sudoers
+
+echo Sudoers File Secured...

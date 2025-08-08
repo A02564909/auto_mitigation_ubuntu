@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#tells where bash is located and uses it for this script.
+
+clear
+sudo apt purge snort* nmap* wireshark* nfs* tcpdump* netcat* filezilla* samba* ophcrack* hydra* cups* avahi* telnet*
+#Removes unecessary packages from the system. Add and remove based on the machine.
+
+sudo systemctl unmask unattended-upgrades	#ensures auto updates are not needed
+sudo apt install unattended-upgrades		#installs auto updates if needed
+sudo dpkg-reconfigure -plow unattended-upgrades	#enables auto updates
+sudo systemctl restart unattended-upgrades	#restarts or reloads dependencies
+
+sudo apt autoremove		#removes obselete packages no longer needed
+sudo apt install -f -y		#fixes broken dependencies
+sudo apt autoclean		#clears the apt cache
