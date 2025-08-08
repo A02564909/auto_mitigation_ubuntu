@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 clear
+sudo cp /etc/apt/sources.list.d/ubuntu.sources ubuntu.sources.bk
 sudo tee /etc/apt/sources.list.d/ubuntu.sources > /dev/null << EOL # copies the default repository text below to both the ubuntu repository file and the dev/null blackhole.
 Types: deb
 URIs: http://us.archive.ubuntu.com/ubuntu/
@@ -14,3 +15,4 @@ Suites: noble-security
 Components: main restricted universe multiverse
 Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 EOL # ends the initialized EOL
+
