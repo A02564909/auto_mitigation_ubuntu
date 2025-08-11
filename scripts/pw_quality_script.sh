@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 clear
 
+#Copy the original of the soon-to-be edited files to a backup file.
+cp /etc/pam.d/common-auth /etc/pam.d/common-auth.bk
+cp /etc/pam.d/common-password /etc/pam.d/common-password.bk
+cp /etc/pam.d/common-session /etc/pam.d/common-session.bk
+cp /etc/security/pwquality.conf /etc/security/pwquality.conf.bk
+
 # Define file paths for PAM and related configuration files
 common_auth="/etc/pam.d/common-auth"
 common_password="/etc/pam.d/common-password"
