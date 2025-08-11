@@ -14,7 +14,7 @@ common_session="/etc/pam.d/common-session"
 pwquality_conf="/etc/security/pwquality.conf"
 
 # Securing common-auth file (remove nullok, add deny 5 and unlock_time 900)
-sed -i 's/auth.*required.*pam_unix.so.*nullok//' $common_auth
+sed -i 's/auth.*required.*pam_unix.so//' $common_auth
 sed -i '/^auth.*required.*pam_unix.so/ s/$/ auth required pam_unix.so deny=5 unlock_time=900/' $common_auth
 
 # Securing common-password file (set retry, minlen, and credit values)
