@@ -1,5 +1,8 @@
 # auto_mitigation_ubuntu
-To use the script, input the following command in order:
+
+Don't use the ubuntu_script file, use the group of files in the scripts folder.
+
+To use the scripts, input the following command in order:
 apt install git
 git clone https://github.com/A02564909/auto_mitigation_ubuntu
 cd auto_mitigation_ubuntu
