@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# This is a general script made to remind the user of basic battle plan tasks and automate some of them
 #Pulling updates
 echo "
 Make sure to apt autoremove unwanted softwares" >> ubuntu_notes.txt
@@ -18,6 +19,7 @@ apt install libpam-pwquality
 cp /etc/pam.d/common-password /etc/pam.d/common-password.backup >> ubuntu_notes.txt
 echo "
 Configure Password Policy"
+
 #Open and Listening Ports.
 apt install net-tools
 echo "
