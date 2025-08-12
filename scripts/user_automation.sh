@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-
 clear
+
 # Get a list of system users with UID between 1000 and 65533
 sysUsers=$(awk -F: '$3 >=1000 && $3 <= 65533 {print $1}' /etc/passwd)
+
 # Read authorized users from file into array
 mapfile -t users < authUsers # Ensure this file exists
 
-cp /etc/passwd /etc/passwd.bk # Backs up the original password file.
+# Backup the original password file.
+cp /etc/passwd /etc/passwd.bk
 
 # Add missing authorized users
 for user in "${users[@]}"; do
@@ -25,5 +27,7 @@ echo "$sysUsers" | while read -r sysUser; do
 	done
 	if [[ "$keep" == false ]]; then
 		userdel -r "$sysUsers"
+  	FI
 done
 echo "Fixed user list to match README file."
+
