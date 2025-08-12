@@ -12,7 +12,7 @@ cp /etc/passwd /etc/passwd.bk
 
 # Add missing authorized users
 for user in "${users[@]}"; do
-	if ! echo "$sysUsers" | grep -q "^$users$"; then
+	if ! echo "$sysUsers" | grep -q "^$user$"; then
 		useradd -m "$user"
 	fi
 done
@@ -26,9 +26,10 @@ echo "$sysUsers" | while read -r sysUser; do
 		fi
 	done
 	if [[ "$keep" == false ]]; then
-		userdel -r "$sysUsers"
+		userdel -r "$sysUser"
   	fi
 done
 echo "Fixed user list to match README file."
+
 
 
