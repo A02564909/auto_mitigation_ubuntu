@@ -1,6 +1,8 @@
 #!/usr/sbin/env bash
 clear
 
+# Save the original sysctl.conf file to a backup file.
+cp /etc/sysctl.conf /etc/sysctl.conf.bk
 
 # Define the most secure sysctl.conf file settings to secure the network.
 SYSCTL_SETTINGS=(
@@ -22,6 +24,8 @@ SYSCTL_SETTINGS=(
     "net.ipv4.tcp_tw_recycle=1"
     "fs.suid_dumpable=0"
     "kernel.dmesg_restrict=1"
+    "net.ipv4.ip_forward=0"
+    "net.ipv4.tcp_syncookies=1"
 )
 
 # Add the sysctl settings to /etc/sysctl.conf
