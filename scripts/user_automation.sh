@@ -13,7 +13,7 @@ cp /etc/passwd /etc/passwd.bk
 # Add missing authorized users
 for user in "${users[@]}"; do
 	if ! echo "$sysUsers" | grep -q "^$user$"; then
-		useradd -m "$user"
+		echo "Should add missing authorized user: $user"
 	fi
 done
 
@@ -33,6 +33,7 @@ echo "$sysUsers" | while read -r sysUser; do
 done
 
 read -p " Unauthorized user will appear in the Unauth file."
+
 
 
 
