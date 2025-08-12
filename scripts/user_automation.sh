@@ -20,16 +20,20 @@ done
 # Remove unauthorized users
 echo "$sysUsers" | while read -r sysUser; do
 	for authUser in "${users[0]}"; do
+ 		keep=false
 		if [[ "$sysUser" == "$authUser" ]]; then
 			keep=true
 			break
 		fi
 	done
+ 
 	if [[ "$keep" == false ]]; then
-		userdel -r "$sysUser"
+		echo "$sysUser" >> UnauthUsers
   	fi
 done
-echo "Fixed user list to match README file."
+
+read -p " Unauthorized user will appear in the Unauth file."
+
 
 
 
