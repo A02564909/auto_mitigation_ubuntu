@@ -27,7 +27,8 @@ echo "$sysUsers" | while read -r sysUser; do
 	done
 	if [[ "$keep" == false ]]; then
 		userdel -r "$sysUsers"
-  	FI
+  	fi
 done
 echo "Fixed user list to match README file."
+
 
