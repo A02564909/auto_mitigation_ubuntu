@@ -19,12 +19,13 @@ done
 
 # Remove unauthorized users
 echo "$sysUsers" | while read -r sysUser; do
-	for authUser in "${users[0]}"; do
- 		keep=false
+	keep=false
+	for authUser in "${users[@]}"; do
 		if [[ "$sysUser" == "$authUser" ]]; then
 			keep=true
 			break
 		fi
+		
 	done
  
 	if [[ "$keep" == false ]]; then
@@ -33,7 +34,6 @@ echo "$sysUsers" | while read -r sysUser; do
 done
 
 read -p " Unauthorized user will appear in the Unauth file."
-
 
 
 
