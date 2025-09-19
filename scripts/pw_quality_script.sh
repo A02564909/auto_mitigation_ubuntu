@@ -37,4 +37,4 @@ echo "dictcheck = 1" >> $pwquality_conf
 chmod 644 $common_auth $common_password $common_account $common_session $pwquality_conf
 chown root:root $common_auth $common_password $common_account $common_session $pwquality_conf
 
-read -p "PAM configuration files secured. Press any key to continue..."
+read -p "PAM configuration files secured. Press Enter to continue..."
