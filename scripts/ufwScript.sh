@@ -9,7 +9,14 @@ ufw default deny incoming 	# Blocks all incoming connections
 ufw default allow outgoing	# Allows all outbound connections. Change to deny for more advanced competitions
 ufw enable			# Enables the firewall
 # write new rules if needed (allowing scoring engine)
+ufw deny 23
+ufw deny 21
+ufw deny 139
+ufw deny 445
+ufw deny 25
+ufw deny 3389
 ufw reload			# Loads new rules (if you wrote them above) 
 ufw logging high		# logs all access attempts
 apt-get autoremove
 apt-get clean
+
