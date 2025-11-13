@@ -1,4 +1,4 @@
-#!/usr/sbin/env bash
+#!/usr/bin/env bash
 clear
 
 # Save the original sysctl.conf file to a backup file.
