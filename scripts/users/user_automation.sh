@@ -4,6 +4,12 @@ clear
 # Get a list of system users with UID between 1000 and 65533
 sysUsers=$(awk -F: '$3 >=1000 && $3 <= 65533 {print $1}' /etc/passwd)
 
+# check if authUsers file exists
+if [[ ! -f authUsers ]]; then
+    echo "Error: authUsers file not found!"
+    exit 1
+fi
+
 # Read authorized users from file into array
 mapfile -t users < authUsers # Ensure this file exists
 
@@ -34,6 +40,7 @@ echo "$sysUsers" | while read -r sysUser; do
 done
 
 read -p " Unauthorized user will appear in the Unauth file."
+
 
 
 
