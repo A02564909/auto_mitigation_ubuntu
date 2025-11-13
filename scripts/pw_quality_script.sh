@@ -32,6 +32,7 @@ echo "dcredit = -1" >> $pwquality_conf
 echo "ocredit = -1" >> $pwquality_conf
 echo "difok = 5" >> $pwquality_conf
 echo "dictcheck = 1" >> $pwquality_conf
+echo "remember = 3" >> $pwquality_conf
 
 # Set correct permissions and ownership for all files
 chmod 644 $common_auth $common_password $common_account $common_session $pwquality_conf
