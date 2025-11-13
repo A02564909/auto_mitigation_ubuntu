@@ -18,7 +18,7 @@ sed -i 's/auth.*required.*pam_unix.so//' $common_auth
 sed -i '/^auth.*required.*pam_unix.so/ s/$/ auth required pam_unix.so deny=5 unlock_time=900/' $common_auth
 
 # Securing common-password file (set retry, minlen, and credit values)
-sed -i 's/^password.*pam_unix.so.*/password [success=1 default=ignore] pam_unix.so retry=4 minlen=10 difok=4 ucredit=2 lcredit=2 dcredit=1 ocredit=1 reject_username enforce_for_root/' $common_password
+sed -i 's/^password.*pam_unix.so.*/password [success=1 default=ignore] pam_unix.so retry=4 minlen=10 difok=4 ucredit=2 lcredit=2 dcredit=1 ocredit=1 remember=3 reject_username enforce_for_root/' $common_password
 
 # Securing common-session file (add session required pam_unix.so)
 sed -i 's/^session.*required.*pam_unix.so.*/session required pam_unix.so/' $common_session
