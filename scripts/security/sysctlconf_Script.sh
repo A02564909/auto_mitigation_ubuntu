@@ -26,6 +26,7 @@ SYSCTL_SETTINGS=(
     "kernel.dmesg_restrict=1"
     "net.ipv4.ip_forward=0"
     "net.ipv4.tcp_syncookies=1"
+    "kernel.randomize_va_space=2"
 )
 
 # Add the sysctl settings to /etc/sysctl.conf
