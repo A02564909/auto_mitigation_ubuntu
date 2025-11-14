@@ -23,4 +23,5 @@ echo "The output of the ls -alF command that displays read, write, and execute p
 ls -alF /etc >> ubuntu_notes.txt
 
 #Check for unauthorized users in admin groups
+echo "Check for unauthorized users in admin groups." >> ubuntu_notes.txt
 grep -e root -e adm -e sudo -e lpadmin -e syslog /etc/group >> ubuntu_notes.txt
