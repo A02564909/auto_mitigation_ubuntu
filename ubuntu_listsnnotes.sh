@@ -21,3 +21,6 @@ echo"Make sure to use ufw deny command to deny unwanted open ports."
 #Check for shared files and folders
 echo "The output of the ls -alF command that displays read, write, and execute permission for the /etc directory." >> ubuntu_notes.txt
 ls -alF /etc >> ubuntu_notes.txt
+
+#Check for unauthorized users in admin groups
+grep -e root -e adm -e sudo -e lpadmin -e syslog /etc/group >> ubuntu_notes.txt
