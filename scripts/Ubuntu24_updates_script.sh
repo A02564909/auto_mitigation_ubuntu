@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
-#tells where bash is located and uses it for this script.
-
 clear
-sudo apt purge snort* nmap* wireshark* nfs* tcpdump* netcat* filezilla* samba* ophcrack* hydra* cups* avahi* telnet*
-#Removes unecessary packages from the system. Add and remove based on the machine.
 
-sudo systemctl unmask unattended-upgrades	#ensures auto updates are not needed
-sudo apt install unattended-upgrades		#installs auto updates if needed
-sudo dpkg-reconfigure -plow unattended-upgrades	#enables auto updates
-sudo systemctl restart unattended-upgrades	#restarts or reloads dependencies
+# 1. #Remove unecessary packages from the system. Add and remove based on the machine.
+apt purge -y snort nmap wireshark tcpdump netcat-openbsd netcat-traditional filezilla samba ophcrack hydra cups avahi-daemon telnet
 
-sudo apt autoremove		#removes obselete packages no longer needed
-sudo apt install -f -y		#fixes broken dependencies
-sudo apt autoclean		#clears the apt cache
+# 2. Update APT index
+apt update
+
+# 3. Fix any partially installed packages (if needed)
+dpkg --configure -a
+
+# 4. Perform a safe upgrade
+apt upgrade -y
+
+# 5. Install and enable unattended-upgrades
+apt install -y unattended-upgrades 
+systemctl enable --now unattended-upgrades
+
+# 6. Clean up
+apt autoremove -y   # removes obselete packages no longer needed
+apt autoclean   # clears the apt cache
+
+read -p "Updates run, unnecessary package(s) removed, and unattended-upgrades installed and enabled. Press Enter to continue..."
