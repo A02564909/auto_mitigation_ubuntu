@@ -6,4 +6,4 @@ while IFS= read -r filename; do
     locate "$filename"
 done < extensions.txt > results.txt
 
-read -p "Prohibited extensions listed in results.txt file. Press Enter to continue."
+read -p "Files using prohibited extensions listed in results.txt file. Press Enter to continue."
