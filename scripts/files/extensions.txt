@@ -35,3 +35,4 @@
 .ico
 .psd
 .pdf
+.zip
