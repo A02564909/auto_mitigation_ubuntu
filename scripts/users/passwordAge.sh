@@ -2,8 +2,8 @@
 clear
 
 MAX=90
-MIN=7
-WARN=14
+MIN=10
+WARN=5
 
 getent passwd | while IFS=: read user _ uid _ _ _ _; do
     # Check UID is non-empty and numeric
