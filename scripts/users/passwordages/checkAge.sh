@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 clear
 
+# Initialize Password Expiration Period Rules variables
 MAX=90
 MIN=10
 WARN=5
