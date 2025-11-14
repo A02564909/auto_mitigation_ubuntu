@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 clear 
 
+# Creates and configures an account lockout policy.
+
 touch /usr/share/pam-configs/faillock
 cp /usr/share/pam-configs/faillock /usr/share/pam-configs/faillock.bk
 
