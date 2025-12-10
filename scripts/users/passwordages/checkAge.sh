@@ -27,7 +27,8 @@ getent passwd | while IFS=: read user _ uid _ _ _ _; do
         if [ "$max" -eq "$MAX" ] && [ "$min" -eq "$MIN" ] && [ "$warn" -eq "$WARN" ]; then
             echo "$user: OK"
         else
-            echo "$user: NOT OK (max=$max, min=$min, warn=$warn)"
+            echo "$user: NOT OK (max=$max, min=$min, warn=$warn)" >> needfix.txt
         fi
     fi
 done
+read -p "Check needfix.txt to find users with uncompliant password ages. You must remove the extra information beside uesr IDs to properly run the chage script. Press a button to continue..."
