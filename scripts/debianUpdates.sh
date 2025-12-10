@@ -2,7 +2,7 @@
 clear
 
 # 1. #Remove unecessary packages from the system. Add and remove based on the machine.
-apt purge -y snort nmap wireshark tcpdump netcat-openbsd netcat-traditional filezilla samba ophcrack hydra cups avahi-daemon telnet doona xprobe
+apt purge -y snort nmap wireshark tcpdump netcat-openbsd netcat-traditional filezilla samba ophcrack hydra cups avahi-daemon telnet doona xprobe amule zangband
 
 # 2. Update APT index
 apt update
@@ -22,4 +22,5 @@ apt autoremove -y   # removes obselete packages no longer needed
 apt autoclean   # clears the apt cache
 
 read -p "Updates run, unnecessary package(s) removed, and unattended-upgrades installed and enabled. Press Enter to continue..."
+
 
