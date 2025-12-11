@@ -6,7 +6,7 @@ sysUsers=$(awk -F: '$3 >=1000 && $3 <= 65533 {print $1}' /etc/passwd)
 
 # check if authUsers file exists
 if [[ ! -f authUsers ]]; then
-    echo "Error: authUsers file not found!"
+    echo "Error: authUsers file not found! CREATE IT...."
     exit 1
 fi
 
@@ -39,7 +39,8 @@ echo "$sysUsers" | while read -r sysUser; do
   	fi
 done
 
-read -p " Unauthorized user will appear in the Unauth file."
+read -p " Unauthorized user will appear in the Unauth file. Verify ouputs are correct before you actually remove users...."
+
 
 
 
